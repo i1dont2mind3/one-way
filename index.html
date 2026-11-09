@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="es" class="h-full bg-slate-50 text-slate-800">
+<head>
+    <!-- ========================================== -->
+    <!-- CONFIGURACIÓN Y METADATOS DE LA PÁGINA     -->
+    <!-- ========================================== -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mutaciones genéticas e impacto neurológico (SCN1A NaV1.1)</title>
+    
+    <!-- Librería de Estilos Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Iconos de FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Fuentes de Google Fonts (Inter y JetBrains Mono) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+    
+    <!-- Configuración personalizada de Colores para Tailwind -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    colors: {
+                        controlBg: '#eff6ff',
+                        controlBorder: '#bfdbfe',
+                        controlText: '#1e40af',
+                        draveBg: '#fef2f2',
+                        draveBorder: '#fecaca',
+                        draveRed: '#ef4444',
+                        draveText: '#991b1b',
+                        gofBg: '#f0fdf4',
+                        gofBorder: '#bbf7d0',
+                        gofGreen: '#22c55e',
+                        gofText: '#166534',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Estilos CSS adicionales y animaciones suaves -->
+    <style>
+        .codon-box {
+            transition: all 0.2s ease-in-out;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+        .card-selectable {
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+        }
+        .card-selectable:hover {
+            transform: translateY(-2px);
+        }
+        .card-active {
+            ring-width: 3px;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+
+<body class="min-h-screen flex flex-col font-sans p-4 sm:p-6 lg:p-8 max-w-6xl mx-auto">
+
+    <!-- ========================================== -->
+    <!-- ENCABEZADO PRINCIPAL DE LA DIAPOSITIVA     -->
+    <!-- ========================================== -->
+    <header class="mb-8">
+        <div class="flex items-center justify-between flex-wrap gap-4 mb-2">
+            <!-- Título principal -->
+            <h1 class="text-2xl sm:text-3xl md:text-4xl font-bold text-slate-900 tracking-tight">
+                Mutaciones genéticas e impacto neurológico
+            </h1>
+            <!-- Etiqueta superior del Gen -->
+            <span class="px-3 py-1 bg-slate-200 text-slate-700 text-xs font-semibold rounded-full uppercase tracking-wider">
+                Gen SCN1A — Proteína Na<sub>V</sub>1.1
+            </span>
+        </div>
+        <!-- Descripción explicativa -->
+        <p class="text-sm sm:text-base text-slate-500 font-normal">
+            Una misma secuencia de 15 bases, tres destinos distintos. El codón resaltado es donde ocurre el cambio.
+        </p>
+    </header>
+
+    <!-- ========================================== -->
+    <!-- SECCIÓN DE LAS 3 TARJETAS PRINCIPALES      -->
+    <!-- ========================================== -->
+    <main class="space-y-6 flex-1">
+
+        <!-- TARJETA 1: CASO CONTROL (Secuencia Normal) -->
+        <div id="card-control" onclick="selectCase('control')" class="card-selectable card-active bg-blue-50/70 border-2 border-blue-200 rounded-2xl p-5 sm:p-6 shadow-sm relative overflow-hidden">
+            <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+                <!-- Columna Izquierda: Genética y codones -->
+                <div class="lg:w-7/12 space-y-3">
+                    <div class="inline-block px-3 py-0.5 bg-blue-200/70 text-blue-800 text-xs font-extrabold rounded-full tracking-wider uppercase mb-1">
+                        Control
+                    </div>
+                    <div>
+                        <h2 class="text-xl font-bold text-slate-900">Secuencia normal</h2>
+                        <p class="text-xs text-slate-500 font-medium">Sin mutación, saludable</p>
+                    </div>
+                    <!-- Bloque visual de los codones -->
+                    <div class="flex flex-wrap items-center gap-2 pt-2">
+                        <div class="codon-box px-3 py-2 bg-white border border-slate-200 rounded-xl font-mono text-base font-bold text-slate-800">ATG</div>
+                        <div class="codon-box px-3 py-2 bg-white border border-slate-200 rounded-xl font-mono text-base font-bold text-slate-800">GAG</div>
+                        <div class="codon-box px-3 py-2 bg-white border border-slate-200 rounded-xl font-mono text-base font-bold text-slate-800">CAA</div>
+                        <div class="codon-box px-3 py-2 bg-white border border-slate-200 rounded-xl font-mono text-base font-bold text-slate-800">ACA</div>
+                        <div class="codon-box px-3 py-2 bg-white border border-slate-200 rounded-xl font-mono text-base font-bold text-slate-800">GTG</div>
+                    </div>
+                    <p class="text-[11px] font-medium text-blue-600/90 pt-0.5">Las 15 bases intactas</p>
+                </div>
+                <!-- Columna Derecha: Impacto neurológico -->
+                <div class="lg:w-5/12 bg-white/60 backdrop-blur-sm border border-blue-100 rounded-xl p-4 flex flex-col justify-center">
+                    <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1 flex items-center justify-between">
+                        <span>Impacto neurológico</span>
+                        <i class="fa-solid fa-circle-check text-blue-500 text-sm"></i>
+                    </h3>
+                    <p class="text-xs sm:text-sm text-slate-700 leading-relaxed">
+                        Las interneuronas mantienen un disparo de ráfagas normal, lo que permite que el cerebro esté en completo equilibrio.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- TARJETA 2: SÍNDROME DE DRAVET (Pérdida de función) -->
+        <div id="card-drave" onclick="selectCase('drave')" class="card-selectable bg-rose-50/70 border-2 border-rose-200/80 rounded-2xl p-5 sm:p-6 shadow-sm relative overflow-hidden">
+            <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+                <!-- Columna Izquierda: Genética y codones con mutación -->
+                <div class="lg:w-7/12 space-y-3">
+                    <div class="inline-block px-3 py-0.5 bg-rose-200 text-rose-800 text-xs font-extrabold rounded-full tracking-wider uppercase mb-1">
+                        Síndrome de Dravet
+                    </div>
+                    <div>
+                        <h2 class="text-xl font-bold text-slate-900">Pérdida de función</h2>
+                        <p class="text-xs text-rose-700 font-semibold">C por T, posición 7</p>
+                    </div>
+                    <!-- Bloque visual con codón de parada resaltado en rojo -->
+                    <div class="flex flex-wrap items-center gap-2 pt-2">
+                        <div class="codon-box px-3 py-2 bg-white border border-slate-200 rounded-xl font-mono text-base font-bold text-slate-800">ATG</div>
+                        <div class="codon-box px-3 py-2 bg-white border border-slate-200 rounded-xl font-mono text-base font-bold text-slate-800">GAG</div>
+                        <div class="codon-box px-3 py-2 bg-rose-500 text-white rounded-xl font-mono text-base font-bold shadow-md shadow-rose-500/20 scale-105">TAA</div>
+                        <div class="codon-box px-3 py-2 bg-white border border-slate-200 rounded-xl font-mono text-base font-bold text-slate-800">ACA</div>
+                        <div class="codon-box px-3 py-2 bg-white border border-slate-200 rounded-xl font-mono text-base font-bold text-slate-800">GTG</div>
+                    </div>
+                    <p class="text-[11px] font-bold text-rose-600 pt-0.5">CAA pasa a TAA (codón de parada)</p>
+                </div>
+                <!-- Columna Derecha: Impacto neurológico -->
+                <div class="lg:w-5/12 bg-white/60 backdrop-blur-sm border border-rose-100 rounded-xl p-4 flex flex-col justify-center">
+                    <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1 flex items-center justify-between">
+                        <span>Impacto neurológico</span>
+                        <i class="fa-solid fa-triangle-exclamation text-rose-500 text-sm"></i>
+                    </h3>
+                    <p class="text-xs sm:text-sm text-slate-700 leading-relaxed">
+                        Genera un silencio eléctrico. Las interneuronas pierden la capacidad de frenar la actividad del cerebro. Ligado al Síndrome de Dravet, una forma severa de epilepsia infantil.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- TARJETA 3: FHM3 / NEONATAL (Ganancia de función) -->
+        <div id="card-gof" onclick="selectCase('gof')" class="card-selectable bg-emerald-50/70 border-2 border-emerald-200/80 rounded-2xl p-5 sm:p-6 shadow-sm relative overflow-hidden">
+            <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+                <!-- Columna Izquierda: Genética y codones con mutación -->
+                <div class="lg:w-7/12 space-y-3">
+                    <div class="inline-block px-3 py-0.5 bg-emerald-200 text-emerald-800 text-xs font-extrabold rounded-full tracking-wider uppercase mb-1">
+                        FHM3 / Neonatal
+                    </div>
+                    <div>
+                        <h2 class="text-xl font-bold text-slate-900">Ganancia de función</h2>
+                        <p class="text-xs text-emerald-700 font-semibold">G por A, posición 4</p>
+                    </div>
+                    <!-- Bloque visual con codón resaltado en verde -->
+                    <div class="flex flex-wrap items-center gap-2 pt-2">
+                        <div class="codon-box px-3 py-2 bg-white border border-slate-200 rounded-xl font-mono text-base font-bold text-slate-800">ATG</div>
+                        <div class="codon-box px-3 py-2 bg-emerald-500 text-white rounded-xl font-mono text-base font-bold shadow-md shadow-emerald-500/20 scale-105">AAG</div>
+                        <div class="codon-box px-3 py-2 bg-white border border-slate-200 rounded-xl font-mono text-base font-bold text-slate-800">CAA</div>
+                        <div class="codon-box px-3 py-2 bg-white border border-slate-200 rounded-xl font-mono text-base font-bold text-slate-800">ACA</div>
+                        <div class="codon-box px-3 py-2 bg-white border border-slate-200 rounded-xl font-mono text-base font-bold text-slate-800">GTG</div>
+                    </div>
+                    <p class="text-[11px] font-bold text-emerald-600 pt-0.5">GAG pasa a AAG</p>
+                </div>
+                <!-- Columna Derecha: Impacto neurológico -->
+                <div class="lg:w-5/12 bg-white/60 backdrop-blur-sm border border-emerald-100 rounded-xl p-4 flex flex-col justify-center">
+                    <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1 flex items-center justify-between">
+                        <span>Impacto neurológico</span>
+                        <i class="fa-solid fa-bolt text-emerald-500 text-sm"></i>
+                    </h3>
+                    <p class="text-xs sm:text-sm text-slate-700 leading-relaxed">
+                        Produce hiperactividad. Hay fugas de corriente y un desajuste total en los canales. Asociado a la migraña hemipléjica familiar tipo 3 (FHM3) o a encefalopatías neonatales.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- ========================================== -->
+    <!-- SECCIÓN INTERACTIVA: SIMULADOR Y TRADUCTOR -->
+    <!-- ========================================== -->
+    <section class="mt-8 bg-slate-900 text-white rounded-2xl p-5 sm:p-6 shadow-xl border border-slate-800">
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-4 border-b border-slate-800 pb-4">
+            <div>
+                <h3 class="text-lg font-bold text-slate-100 flex items-center gap-2">
+                    <i class="fa-solid fa-wave-square text-cyan-400"></i> Simulador Electrofisiológico en Tiempo Real
+                </h3>
+                <p class="text-xs text-slate-400">Haz clic en cualquiera de las 3 tarjetas superiores para simular el comportamiento bioeléctrico.</p>
+            </div>
+            <div class="flex items-center gap-3">
+                <span id="badge-active-case" class="px-3 py-1 rounded-full text-xs font-bold bg-blue-500/20 text-blue-300 border border-blue-500/30">
+                    Caso Activo: CONTROL
+                </span>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+            
+            <!-- Columna Izquierda: Pantalla del Osciloscopio (Canvas) -->
+            <div class="lg:col-span-7 bg-slate-950 rounded-xl p-3 border border-slate-800">
+                <div class="flex justify-between items-center text-[11px] text-slate-400 font-mono mb-2 px-1">
+                    <span>REGISTRO POTENCIAL DE MEMBRANA (mV)</span>
+                    <span id="oscilloscope-freq" class="text-cyan-400 font-bold">Ráfagas ~55 Hz</span>
+                </div>
+                <!-- Contenedor del gráfico animado -->
+                <div class="w-full h-44 relative" id="canvas-container">
+                    <canvas id="oscCanvas" style="width: 100%; height: 100%; display: block;"></canvas>
+                </div>
+            </div>
+
+            <!-- Columna Derecha: Traducción a Aminoácidos -->
+            <div class="lg:col-span-5 bg-slate-800/60 rounded-xl p-4 border border-slate-700/60 space-y-3">
+                <h4 class="text-xs font-bold uppercase tracking-wider text-slate-300 flex items-center gap-1.5">
+                    <i class="fa-solid fa-dna text-purple-400"></i> Traducción Proteica Resultante
+                </h4>
+                <!-- Contenedor donde JavaScript insertará los aminoácidos -->
+                <div id="protein-sequence-container" class="space-y-2"></div>
+                <!-- Descripción del efecto molecular -->
+                <div class="pt-2 border-t border-slate-700/50 text-[11px] text-slate-400 leading-tight">
+                    <span class="font-bold text-slate-300">Efecto Molecular:</span> 
+                    <span id="protein-effect-desc">La proteína NaV1.1 se sintetiza completa y se inserta normalmente en la membrana interneuronal.</span>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- FOOTER EDUCATIVO -->
+    <footer class="mt-8 text-center text-xs text-slate-400 pb-4">
+        Proyecto Visual & Interactivo de Biología Molecular — Basado en variantes del gen SCN1A
+    </footer>
+
+    <!-- ========================================== -->
+    <!-- LÓGICA DE JAVASCRIPT (SE EJECUTA AL FINAL) -->
+    <!-- ========================================== -->
+    <script>
+        // Variable que almacena el caso seleccionado actual
+        let activeCase = 'control';
+        let stepCount = 0;
+
+        // Base de datos de los textos, colores y aminoácidos para cada mutación
+        const DATA_CASES = {
+            'control': {
+                name: 'CONTROL',
+                colorClass: 'bg-blue-500/20 text-blue-300 border-blue-500/30',
+                freqText: 'Ráfagas Estables ~55 Hz',
+                aminoacids: [
+                    { codon: 'ATG', aa: 'Met', muted: false },
+                    { codon: 'GAG', aa: 'Glu', muted: false },
+                    { codon: 'CAA', aa: 'Gln', muted: false },
+                    { codon: 'ACA', aa: 'Thr', muted: false },
+                    { codon: 'GTG', aa: 'Val', muted: false }
+                ],
+                effect: 'La proteína NaV1.1 se sintetiza completa de 2,009 aminoácidos, insertándose en la membrana interneuronal para permitir el disparo en ráfagas de alta frecuencia.'
+            },
+            'drave': {
+                name: 'SÍNDROME DE DRAVET (LoF)',
+                colorClass: 'bg-rose-500/20 text-rose-300 border-rose-500/30',
+                freqText: 'Silencio Eléctrico (0 Hz)',
+                aminoacids: [
+                    { codon: 'ATG', aa: 'Met', muted: false },
+                    { codon: 'GAG', aa: 'Glu', muted: false },
+                    { codon: 'TAA', aa: 'STOP', muted: true, color: 'bg-rose-500 text-white' },
+                    { codon: 'ACA', aa: '---', muted: true, opacity: 'opacity-40' },
+                    { codon: 'GTG', aa: '---', muted: true, opacity: 'opacity-40' }
+                ],
+                effect: 'Truncamiento proteico severo. La proteína NaV1.1 no se produce funcionalmente (Haploinsuficiencia), provocando pérdida de la inhibición GABAérgica.'
+            },
+            'gof': {
+                name: 'FHM3 GANANCIA DE FUNCIÓN',
+                colorClass: 'bg-emerald-500/20 text-emerald-300 border-emerald-500/30',
+                freqText: 'Hiperactividad / Fuga (110 Hz)',
+                aminoacids: [
+                    { codon: 'ATG', aa: 'Met', muted: false },
+                    { codon: 'AAG', aa: 'Lys', muted: true, color: 'bg-emerald-500 text-white' },
+                    { codon: 'CAA', aa: 'Gln', muted: false },
+                    { codon: 'ACA', aa: 'Thr', muted: false },
+                    { codon: 'GTG', aa: 'Val', muted: false }
+                ],
+                effect: 'Cambio de aminoácido que impide el cierre/inactivación correcto del canal. Genera fuga de sodio persistente e hiperexcitabilidad descontrolada.'
+            }
+        };
+
+        // Función que se activa al hacer clic en cualquiera de las 3 tarjetas
+        function selectCase(caseKey) {
+            activeCase = caseKey;
+
+            // Cambiar estilos activos/inactivos en las tarjetas visuales
+            const cards = {
+                'control': document.getElementById('card-control'),
+                'drave': document.getElementById('card-drave'),
+                'gof': document.getElementById('card-gof')
+            };
+
+            Object.keys(cards).forEach(key => {
+                if (key === caseKey) {
+                    cards[key].classList.add('card-active');
+                    cards[key].style.transform = 'scale(1.01)';
+                } else {
+                    cards[key].classList.remove('card-active');
+                    cards[key].style.transform = 'scale(1)';
+                }
+            });
+
+            // Actualizar textos y etiquetas dinámicamente
+            const info = DATA_CASES[caseKey];
+            const badge = document.getElementById('badge-active-case');
+            badge.className = `px-3 py-1 rounded-full text-xs font-bold border ${info.colorClass}`;
+            badge.innerText = `Caso Activo: ${info.name}`;
+
+            document.getElementById('oscilloscope-freq').innerText = info.freqText;
+            document.getElementById('protein-effect-desc').innerHTML = info.effect;
+
+            // Renderizar la cadena de aminoácidos correspondiente
+            renderAminoacids(info.aminoacids);
+        }
+
+        // Función para dibujar visualmente la traducción de proteínas en HTML
+        function renderAminoacids(aminoList) {
+            const container = document.getElementById('protein-sequence-container');
+            container.innerHTML = '';
+            
+            const listEl = document.createElement('div');
+            listEl.className = 'flex flex-wrap items-center gap-1.5';
+
+            aminoList.forEach((item, idx) => {
+                const itemEl = document.createElement('div');
+                let bgStyle = 'bg-slate-700 text-slate-200';
+                if (item.color) bgStyle = item.color;
+                if (item.opacity) bgStyle = 'bg-slate-700/30 text-slate-500 ' + item.opacity;
+
+                itemEl.className = `px-2.5 py-1 rounded-lg font-mono text-xs font-bold flex flex-col items-center border border-slate-600/50 ${bgStyle}`;
+                itemEl.innerHTML = `
+                    <span class="text-[10px] opacity-70">${item.codon}</span>
+                    <span>${item.aa}</span>
+                `;
+                listEl.appendChild(itemEl);
+
+                // Agregar flecha separadora (excepto en el último elemento)
+                if (idx < aminoList.length - 1) {
+                    const arrow = document.createElement('span');
+                    arrow.className = 'text-slate-500 text-xs';
+                    arrow.innerText = '→';
+                    listEl.appendChild(arrow);
+                }
+            });
+
+            container.appendChild(listEl);
+        }
+
+        // ==========================================================
+        // MOTOR DEL OSCILOSCOPIO (ANIMACIÓN EN TIEMPO REAL CON CANVAS)
+        // ==========================================================
+        const canvas = document.getElementById('oscCanvas');
+        const ctx = canvas.getContext('2d');
+
+        // Ajustar resolución del canvas según la pantalla
+        function resizeCanvas() {
+            const container = document.getElementById('canvas-container');
+            const width = container.clientWidth || 500;
+            const height = container.clientHeight || 180;
+            
+            canvas.width = width * window.devicePixelRatio;
+            canvas.height = height * window.devicePixelRatio;
+        }
+
+        window.addEventListener('resize', resizeCanvas);
+
+        let waveHistory = [];
+        const maxHistory = 300;
+
+        // Ecuaciones simuladas de potencial de membrana según la mutación activa
+        function getMembranePotential(t, cCase) {
+            const baseReposo = -65;
+            if (cCase === 'control') {
+                // Ráfagas normales y estables
+                const cycle = t % 40;
+                if (cycle < 6) return baseReposo + Math.sin((cycle / 6) * Math.PI) * 95;
+                return baseReposo + Math.sin(t * 0.1) * 2;
+            } else if (cCase === 'drave') {
+                // Silencio eléctrico (sin picos de disparo)
+                return baseReposo + (Math.sin(t * 0.05) * 1.5) + (Math.random() * 1.0 - 0.5);
+            } else if (cCase === 'gof') {
+                // Hiperactividad paroxística y fugas constantes
+                const cycle = t % 15;
+                const elevatedBase = -45; 
+                if (cycle < 5) return elevatedBase + Math.sin((cycle / 5) * Math.PI) * 80;
+                return elevatedBase + (Math.random() * 4 - 2);
+            }
+        }
+
+        // Bucle principal que dibuja la onda del osciloscopio fotograma a fotograma
+        function drawOscilloscope() {
+            stepCount++;
+            const w = canvas.width;
+            const h = canvas.height;
+
+            if (w === 0 || h === 0) resizeCanvas();
+
+            // Fondo oscuro del osciloscopio
+            ctx.fillStyle = '#020617';
+            ctx.fillRect(0, 0, w, h);
+
+            // Dibujar la cuadrícula interna del monitor
+            ctx.strokeStyle = '#1e293b';
+            ctx.lineWidth = 1;
+            const gridY = h / 4;
+            for (let y = 0; y <= h; y += gridY) {
+                ctx.beginPath();
+                ctx.moveTo(0, y);
+                ctx.lineTo(w, y);
+                ctx.stroke();
+            }
+
+            // Obtener el siguiente valor de voltaje en milivoltios (mV)
+            const val = getMembranePotential(stepCount, activeCase);
+            waveHistory.push(val);
+            if (waveHistory.length > maxHistory) waveHistory.shift();
+
+            const minmV = -90;
+            const maxmV = 40;
+            const mapY = (mV) => h - ((mV - minmV) / (maxmV - minmV)) * h;
+
+            // Configurar color de la línea según el caso activo (Azul, Rojo o Verde)
+            ctx.beginPath();
+            ctx.lineWidth = 2.5 * window.devicePixelRatio;
+            if (activeCase === 'control') {
+                ctx.strokeStyle = '#38bdf8'; // Azul
+                ctx.shadowColor = '#0284c7';
+            } else if (activeCase === 'drave') {
+                ctx.strokeStyle = '#f43f5e'; // Rojo
+                ctx.shadowColor = '#e11d48';
+            } else {
+                ctx.strokeStyle = '#10b981'; // Verde
+                ctx.shadowColor = '#059669';
+            }
+            ctx.shadowBlur = 8 * window.devicePixelRatio;
+
+            // Trazar la onda sobre el canvas
+            const dx = w / (maxHistory - 1);
+            for (let i = 0; i < waveHistory.length; i++) {
+                const x = i * dx;
+                const y = mapY(waveHistory[i]);
+                if (i === 0) ctx.moveTo(x, y);
+                else ctx.lineTo(x, y);
+            }
+            ctx.stroke();
+            ctx.shadowBlur = 0;
+
+            // Dibujar un punto blanco brillante en la punta de la onda
+            if (waveHistory.length > 0) {
+                const lastX = (waveHistory.length - 1) * dx;
+                const lastY = mapY(waveHistory[waveHistory.length - 1]);
+                ctx.fillStyle = '#ffffff';
+                ctx.beginPath();
+                ctx.arc(lastX, lastY, 3.5 * window.devicePixelRatio, 0, Math.PI * 2);
+                ctx.fill();
+            }
+
+            // Continuar animando el bucle de la onda
+            requestAnimationFrame(drawOscilloscope);
+        }
+
+        // Inicializar la aplicación al cargar la ventana por completo
+        window.onload = function() {
+            selectCase('control');
+            resizeCanvas();
+            requestAnimationFrame(drawOscilloscope);
+        };
+    </script>
+</body>
+</html>
